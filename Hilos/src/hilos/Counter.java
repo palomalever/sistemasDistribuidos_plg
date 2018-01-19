@@ -16,7 +16,7 @@ public class Counter {
     
     }
     
-    public synchronized void aMethod(){  //incrementa 10.
+    public synchronized void aMethod(){  //incrementa 10.   //Al tener uno sincronizado, solo permite que un hilo entre a la vez
         for(int i =0; i<10; i++){
             n++;
             System.out.print(n + " ");
