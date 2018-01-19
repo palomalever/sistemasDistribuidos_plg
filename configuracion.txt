@@ -1,0 +1,22 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+#       name = sdist
+#       email = sdist@itam.mx
+~
+~
+salir: esc
+:
+q!
+
+
+Remove your SSH keys from ~/.ssh (or where you stored them).
+
+Remove your user settings:
+
+git config --global --unset user.name
+git config --global --unset user.email
+(or all your global settings:
+
+git config --global --unset-all
+)
