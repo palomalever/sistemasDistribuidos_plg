@@ -9,8 +9,9 @@ import java.io.*;
 
 public class TCPClient {
 
+    
     public static void main (String args[]) {
-
+           long startTime = System.currentTimeMillis();
 	Socket s = null;
 	    try {
 	    	int serverPort = 7896;
@@ -20,9 +21,12 @@ public class TCPClient {
 		DataInputStream in = new DataInputStream( s.getInputStream());
 		DataOutputStream out =
 			new DataOutputStream( s.getOutputStream());
-		out.writeUTF("Hello");        	// UTF is a string encoding 
+		out.writeUTF(args[0]);        	// UTF is a string encoding 
                 
-		String data = in.readUTF();	      
+		String data = in.readUTF();	//con el apuntador al flujo de entrada, lee un UTF
+                
+                // lo que hace un cliente es enviar un hello este lo recibe y se lo envia.
+                
                 System.out.println("Received: "+ data) ;      
        	    } 
             catch (UnknownHostException e) {
@@ -40,5 +44,11 @@ public class TCPClient {
                     } catch (IOException e){
                     System.out.println("close:"+e.getMessage());}
                     }
+                        long spentTime = System.currentTimeMillis() - startTime;
+                        System.out.println("Tiempo: " + spentTime);
             }
+
+    public static void main() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

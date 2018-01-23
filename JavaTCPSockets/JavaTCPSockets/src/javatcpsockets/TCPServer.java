@@ -10,10 +10,12 @@
 
 import java.net.*;
 import java.io.*;
-
+import java.util.logging.Logger;
+import server.Person;
+import server.AddressBook;
 
 public class TCPServer {
-    
+
     public static void main (String args[]) {
 	try{
 		int serverPort = 7896; 
@@ -33,6 +35,8 @@ class Connection extends Thread {
 	DataInputStream in;
 	DataOutputStream out;
 	Socket clientSocket;
+        AddressBook addressBook = new AddressBook();
+        
 	public Connection (Socket aClientSocket) {
 	    try {
 		clientSocket = aClientSocket;
@@ -46,8 +50,14 @@ class Connection extends Thread {
 	    try {			                 // an echo server
 		String data = in.readUTF();	     
                 System.out.println("Message received from: " + clientSocket.getRemoteSocketAddress());
-		out.writeUTF(data);
-	    } 
+                if(Integer.parseInt(data) < 5){
+                String retu = addressBook.getRecord(Integer.parseInt(data)).getName();
+		out.writeUTF(retu);
+                }
+                else 
+                    out.writeUTF("Numero invalido");
+                
+            } 
             catch(EOFException e) {
                 System.out.println("EOF:"+e.getMessage());
 	    } 
@@ -61,6 +71,7 @@ class Connection extends Thread {
                 }
                 }
             }
+    private static final Logger LOG = Logger.getLogger(Connection.class.getName());
 }
 
 
